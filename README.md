@@ -76,7 +76,7 @@ install.packages("dplyr")
 ```
 * tidyverse
 ```sh
-install.packages("tidyverser")
+install.packages("tidyverse")
 ```
 * ggplot2
 ```sh
@@ -89,9 +89,9 @@ install.packages("ggplot2")
 ```sh
 git clone https://github.com/jtourkis/MBTA-Ridership-Model.git
 ```
-2. Install NPM packages
+2. Install packages
 ```sh
-npm install
+install.packages()
 ```
 
 
