@@ -1,0 +1,154 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Cmd+Shift+Enter*. 
+
+```{r}
+library(dplyr)
+library(tidyverse)
+library(cowplot)
+library(ggplot2)
+
+setwd('/Users/james/Desktop/MIT_IDSS_Meetings')
+
+
+#####REDUCE DATA TO COLUMNS OF INTEREST: 2019 Population Estimates and 7/29 John Hopkins Covid Case Counts
+
+
+Census_Pop_2019<-read_csv("co-est2019-alldata.csv")
+Census_Pop_2019<-data.frame(COUNTY=Census_Pop_2019$COUNTY, STNAME=Census_Pop_2019$STNAME, CTYNAME=Census_Pop_2019$CTYNAME, POPESTIMATE2019=Census_Pop_2019$POPESTIMATE2019 )
+print(Census_Pop_2019)
+
+
+JH_Covid_TS_Cases_7_29<-read_csv("JH_time_series_covid19_confirmed_US.csv")
+JH_Covid_TS_Cases_7_29<-data.frame(FIPS=JH_Covid_TS_Cases_7_29$FIPS, Province_State=JH_Covid_TS_Cases_7_29$Province_State, Admin2=JH_Covid_TS_Cases_7_29$Admin2, Country_Region=JH_Covid_TS_Cases_7_29$Country_Region,Lat=JH_Covid_TS_Cases_7_29$Lat,Long_=JH_Covid_TS_Cases_7_29$Long_, Covid_Case_Count_7_29=JH_Covid_TS_Cases_7_29$`7/29/20`)
+
+print(JH_Covid_TS_Cases_7_29)
+
+### LIST STATES AND COUNTIES OF INTEREST ####
+
+counties_full<-c("New York County", "Kings County","Queens County", "Bronx County", "Bronx County", "Richmond County", "Rockland County", "Nassau County", "Suffolk County", "Orange County", "Putnam County", "Dutchess County", "Westchester County", "Delaware County", "Montgomery County", "Bucks County", "Chester County","Philedelphia County", "Los Angeles County", "Orange County","Cook County", "Norfolk County", "Essex County", "Middlesex County", "Plymouth County", "Bristol County", "Worcester County", "Arlington County", "Fairfax County", "Prince George’s County","Montgomery County", "District of Columbia", "Alexandria city", "Fulton County", "Clayton County", "DeKalb County", "Boulder County", "Broomfield County","Denver County", "Jefferson County", "Adams County", "Arapahoe County","Douglas County", "Weld County", "San Francisco County", "King County", "Santa Clara County")
+
+admin_full<-c("New York", "Kings","Queens", "Bronx", "Bronx", "Richmond", "Rockland", "Nassau", "Suffolk", "Orange", "Putnam", "Dutchess", "Westchester", "Delaware", "Montgomery", "Bucks", "Chester","Philedelphia", "Los Angeles", "Orange","Cook", "Norfolk County", "Essex", "Middlesex", "Plymouth", "Bristol", "Worcester", "Arlington", "Fairfax", "Prince George’s","Montgomery", "District of Columbia", "Alexandria", "Fulton", "Clayton", "DeKalb", "Boulder", "Broomfield","Denver", "Jefferson", "Adams", "Arapahoe","Douglas", "Weld", "San Francisco", "King", "Santa Clara")
+
+states<-c("California", "Virginia","Maryland","Massachusetts", "New York", "Illinois", "Pennsylvania", "Georgia" , "Washington", "Colorado")
+
+#####FUZZY FILTER ONLY ROWS WITH STATES OF INTEREST
+
+JH_Covid_TS_Cases_7_29_2<-JH_Covid_TS_Cases_7_29[grep(paste(states, collapse="|"), JH_Covid_TS_Cases_7_29$Province_State),]
+
+#JH_Covid_TS_Cases_7_29<-JH_Covid_TS_Cases_7_29 %>%
+#    filter(grepl(paste(states, collapse="|"), Province_State))
+
+Census_Pop_2019_2<-Census_Pop_2019[grep(paste(states, collapse="|"), Census_Pop_2019$STNAME),]
+
+#####FUZZY FILTER ONLY ROWS WITH COUNTIES OF INTEREST
+
+JH_Covid_TS_Cases_7_29_2<-JH_Covid_TS_Cases_7_29_2[grep(paste(admin_full, collapse="|"), JH_Covid_TS_Cases_7_29_2$Admin2),]
+JH_Covid_TS_Cases_7_29_2<-filter(JH_Covid_TS_Cases_7_29_2, Province_State != "West Virginia" )
+
+print(JH_Covid_TS_Cases_7_29_2)
+
+Census_Pop_2019_2<-Census_Pop_2019_2[grep(paste(counties_full, collapse="|"), Census_Pop_2019_2$CTYNAME),]
+
+Census_Pop_2019_2<-filter(Census_Pop_2019_2, STNAME != "West Virginia" )
+
+print(Census_Pop_2019_2)
+
+####International Airport Analysis#####
+
+Int_Airport_Counties<-read_csv("US_International_Air_Passenger_Stats_March2.csv")
+
+print(Int_Airport_Counties)
+
+states_abb<-data.frame(State=state.abb, state.name)
+states_abb<-states_abb %>% add_row(state.name = "District of Columbia", State = "DC")
+states_abb<-states_abb %>% add_row(state.name = "Puerto Rico", State = "PR")
+
+print(states_abb)
+
+####Note: Guam and Saipan Removed
+
+Int_Airport_Counties<-merge(Int_Airport_Counties, states_abb, by="State")
+
+###Rename County to Admin2
+names(Int_Airport_Counties)[names(Int_Airport_Counties) == 'County'] <- 'Admin2'
+names(Int_Airport_Counties)[names(Int_Airport_Counties) == 'state.name'] <- 'Province_State'
+###Insert_Dummy###
+Int_Airport_Counties$Int_Airport_Dummy<-1
+
+print(Int_Airport_Counties)
+
+JH_Int_Airport_Counties2<-merge(JH_Covid_TS_Cases_7_29, Int_Airport_Counties, by=c("Admin2","Province_State"))
+print(JH_Int_Airport_Counties2)
+
+####MERGE WITH LARGER JH DATA#####
+
+JH_NO_NA_7_29<-filter(JH_Covid_TS_Cases_7_29,!is.na(Admin2))
+
+print(JH_NO_NA_7_29)
+
+JH_Int_Airport_Counties_Full<-merge(JH_NO_NA_7_29, Int_Airport_Counties, all.x=TRUE, by=c("Admin2","Province_State"))
+
+print(JH_Int_Airport_Counties_Full)
+
+JH_Int_Airport_Counties_Full$Int_Airport_Dummy[is.na(JH_Int_Airport_Counties_Full$Int_Airport_Dummy)] <- 0
+
+sum(JH_Int_Airport_Counties_Full$Int_Airport_Dummy)
+
+
+#write.csv(JH_Int_Airport_Counties_Full,"/Users/james/Desktop/JH_Int_Airport_Counties_Full.csv")
+
+JH_Int_Airport_Counties_Full2<-read_csv("JH_Int_Airport_Counties_Full copy.csv")
+print(JH_Int_Airport_Counties_Full2)
+
+
+CDC_Soc_Vuln<-read_csv("SVI2018_US_COUNTY.csv")
+CDC_Soc_Vuln$FIPS <- as.numeric(CDC_Soc_Vuln$FIPS)
+
+print(CDC_Soc_Vuln)
+
+JH_Int_Airport_Counties_Full3<-merge(JH_Int_Airport_Counties_Full2, CDC_Soc_Vuln, all.x=TRUE, by=c("FIPS"))
+
+JH_Int_Airport_Counties_Full3$Pop_Density<- JH_Int_Airport_Counties_Full3$E_TOTPOP/JH_Int_Airport_Counties_Full3$AREA_SQMI
+
+JH_Int_Airport_Counties_Full3$Case_Count_Pop_Density<-JH_Int_Airport_Counties_Full3$Covid_Case_Count_7_29/JH_Int_Airport_Counties_Full3$Pop_Density
+
+summary(JH_Int_Airport_Counties_Full3$Case_Count_Pop_Density)
+
+
+####Check NA's Note: Puerto Rico is Missing from CDC. 
+
+filter(JH_Int_Airport_Counties_Full3,is.na(Case_Count_Pop_Density))
+
+print(JH_Int_Airport_Counties_Full3)
+
+#write.csv(JH_Int_Airport_Counties_Full3,"/Users/james/Desktop/JH_Int_Airport_Counties_Full_w_SVI.csv")
+
+
+###State Level Data from John Hopkins on Confirmed Cases versus Tests Performed. 
+#### https://coronavirus.jhu.edu/testing/states-comparison
+#### All Data Per 1000
+####Positivity Ratio
+
+JH_Ratio<-read_csv("JH_Confirmed_Ratio.csv")
+
+
+JH_Ratio$ConfirmedTestRatio <- (JH_Ratio$Confirmed/JH_Ratio$Tests)*1000
+
+print(JH_Ratio)
+
+cor(JH_Ratio[,2:5])
+
+```
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Cmd+Option+I*.
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Cmd+Shift+K* to preview the HTML file). 
+
+The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
+
