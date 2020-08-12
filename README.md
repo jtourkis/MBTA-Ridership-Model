@@ -6,19 +6,18 @@
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
 
-
-<!-- PROJECT LOGO -->
 <br />
+
 <p align="center">
+
   <a href="https://github.com/jtourkis/MBTA-Ridership-Model">
-    <img src="https://blog.mass.gov/transportation/wp-content/uploads/sites/2/2015/10/MBTA-Bus-2.jpg" alt="Logo" width="80" height="80">
+    <img src="MBTA-Bus-2.jpg" alt="MBTA" width="300" height="300" style="border:5px solid black">
   </a>
   
-
   <h3 align="center">MBTA Ridership Model</h3>
 
   <p align="center">
-    The goal of this repository is to create a mechanistic model of MBTA bus pickups using various probability distributions and choose the best.
+    The goal of this repository is to explore possible mechanistic models of MBTA bus pickups using various probability distributions and choose the best.
     <br />
     <a href="https://github.com/jtourkis/MBTA-Ridership-Model"><strong>Explore the docs »</strong></a>
     <br />
