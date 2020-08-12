@@ -5,7 +5,8 @@
   
   <a href="https://github.com/jtourkis/MBTA-Ridership-Model">
     
-    <img src="https://www.animationsource.org/sites_content/talespin/upload/fanart/tpirman1982/tpirman198234.gif" alt="Logo" width="80" height="80">
+    <img src="https://blog.mass.gov/transportation/wp-content/uploads/sites/2/2015/10/MBTA-Bus-2.jpg" alt="Logo" width="80" height="80">
+    
   </a>
 
   <h3 align="center">MBTA Ridership Model</h3>
