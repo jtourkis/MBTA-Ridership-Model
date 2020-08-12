@@ -58,8 +58,8 @@ Here's a blank template to get started:
 
 ### Built With
 
-* [R]()
-* [Python]()
+* [R](https://www.r-project.org) / [R Studio](https://rstudio.com)
+* [Python](https://www.python.org) / [Jupyter Notebook](https://jupyter.org)
 
 
 <!-- GETTING STARTED -->
