@@ -126,7 +126,7 @@ Contributions are what make the open source community such an amazing place to b
 <!-- LICENSE -->
 ## License
 
-Note: The intial README Template was distributed under the MIT License. Copyright (c) 2018 Othneil Drew. [LICENSE](https://github.com/othneildrew/Best-README-Template/LICENSE.txt)  for more information. 
+Note: The intial README Template was distributed under the MIT License. Copyright (c) 2018 Othneil Drew. [LICENSE](https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt)  for more information. 
 
 
 
