@@ -11,7 +11,7 @@
   <h3 align="center">MBTA Ridership Model</h3>
 
   <p align="center">
-    The goal of this repository is to create a mechanistic model of the distribution of MBTA bus pickups using various probabiliyu distributions and choose the best.
+    The goal of this repository is to create a mechanistic model of MBTA bus pickups using various probability distributions and choose the best.
     <br />
     <a href="https://github.com/jtourkis/MBTA-Ridership-Model"><strong>Explore the docs »</strong></a>
     <br />
@@ -77,8 +77,9 @@ npm install npm@latest -g
 ### Installation
  
 1. Clone the repo
+
 ```sh
-git clone https://github.com/github_username/repo.git
+git clone https://github.com/jtourkis/MBTA-Ridership-Model.git
 ```
 2. Install NPM packages
 ```sh
