@@ -69,12 +69,19 @@ To get a local copy up and running follow these simple steps.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
+List of required packages. 
+* dplyr
 ```sh
-npm install npm@latest -g
+install.packages("dplyr")
 ```
-
+* tidyverse
+```sh
+install.packages("tidyverser")
+```
+* ggplot2
+```sh
+install.packages("ggplot2")
+```
 ### Installation
  
 1. Clone the repo
