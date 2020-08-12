@@ -126,7 +126,7 @@ Contributions are what make the open source community such an amazing place to b
 <!-- LICENSE -->
 ## License
 
-Distributed under the MIT License. See `LICENSE` for more information.
+This Readme Template  was distributed under the MIT License. Copyright (c) 2018 Othneil Drew. See `LICENSE` for more information. 
 
 
 
@@ -142,7 +142,7 @@ Project Link: [https://github.com/jtourkis/MBTA-Ridership-Model](https://github.
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
 
-* [Best-README-Template](https://github.com/othneildrew/Best-README-Template/blob/master/BLANK_README.md) Copyright (c) 2018 Othneil Drew
+* [Best-README-Template](https://github.com/othneildrew/Best-README-Template/blob/master/BLANK_README.md) 
 * []()
 * []()
 
