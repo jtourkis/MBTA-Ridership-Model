@@ -3,9 +3,9 @@
 <br />
 <p align="center">
   
-  <a href="https://github.com/github_username/repo">
+  <a href="https://github.com/jtourkis/MBTA-Ridership-Model">
     
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="https://www.animationsource.org/sites_content/talespin/upload/fanart/tpirman1982/tpirman198234.gif" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">MBTA Ridership Model</h3>
