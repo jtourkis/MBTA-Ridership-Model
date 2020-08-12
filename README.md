@@ -1,13 +1,19 @@
-# MBTA-Ridership-Model
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![MIT License][license-shield]][license-url]
+[![LinkedIn][linkedin-shield]][linkedin-url]
+
+
+
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  
   <a href="https://github.com/jtourkis/MBTA-Ridership-Model">
-    
     <img src="https://blog.mass.gov/transportation/wp-content/uploads/sites/2/2015/10/MBTA-Bus-2.jpg" alt="Logo" width="80" height="80">
-    
   </a>
+  
 
   <h3 align="center">MBTA Ridership Model</h3>
 
