@@ -142,7 +142,7 @@ Project Link: [https://github.com/jtourkis/MBTA-Ridership-Model](https://github.
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
 
-* [Best-README-Template](https://github.com/othneildrew/Best-README-Template/blob/master/BLANK_README.md)
+* [Best-README-Template](https://github.com/othneildrew/Best-README-Template/blob/master/BLANK_README.md) Copyright (c) 2018 Othneil Drew
 * []()
 * []()
 
