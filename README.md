@@ -14,7 +14,7 @@
     <img src="MBTA-Bus-2.jpg" alt="MBTA" width="300" height="300" style="border:5px solid black">
   </a>
   
-  <h3 align="center">MBTA Ridership Model</h3>
+  <h3 align="center">MBTA Bus Ridership Model</h3>
 
   <p align="center">
     The goal of this repository is to explore possible mechanistic models of MBTA bus pickups using various probability distributions and choose the best.
