@@ -140,7 +140,7 @@ Project Link: [https://github.com/jtourkis/MBTA-Ridership-Model](https://github.
 ## Acknowledgements
 
 * [Best-README-Template](https://github.com/othneildrew/Best-README-Template/blob/master/BLANK_README.md) 
-* []()
+* [MBTA Bus Ridership by Time Period, Season, Route/Line, and Stop Dataset](https://mbta-massdot.opendata.arcgis.com/datasets/mbta-bus-ridership-by-time-period-season-route-line-and-stop)
 * []()
 
 
