@@ -4,7 +4,7 @@ library(cowplot)
 library(ggplot2)
 
 
-Route_28<-read_csv("../data/MBTA_Fall_Route_28_Bus_Ridership_2016_2019.csv")
+Route_28<-read_csv("https://raw.githubusercontent.com/jtourkis/MBTA-Ridership-Model/master/data/MBTA_Fall_Route_28_Bus_Ridership_2016_2019.csv?token=AQQA7YLQY6CJAE7KMGXKFUK7GSZ7O")
 
 
 plot_28 <- ggplot(Route_28, aes(x=average_ons)) + 
@@ -55,6 +55,8 @@ print(m)
 
 
 N <- sum(route_28_boarding$Freq)   
+Xn<-mean(Route_28_Peak_AM$average_ons)
+p_MLE<- 1/(Xn+1)
 
 ####size is r#####
 ####N is sample size
