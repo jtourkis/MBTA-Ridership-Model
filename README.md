@@ -103,6 +103,10 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 <!-- ROADMAP -->
 ## Roadmap
 
+1. Explore potential probability distribtions. 
+2. Find maximum likelihood and method of moments estimates to simulate data for proposed distributions. 
+3. Test Goodness of Fit. Run Kolmogorov-Smirnov (Continuous) or Chi-Squared (Discrete) Tests to assess whether proposed distributions can be rejected. 
+
 See the [open issues](https://github.com/github_username/repo/issues) for a list of proposed features (and known issues).
 
 
