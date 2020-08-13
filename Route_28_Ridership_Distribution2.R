@@ -4,8 +4,11 @@ library(cowplot)
 library(ggplot2)
 
 
-Route_28<-read_csv("https://raw.githubusercontent.com/jtourkis/MBTA-Ridership-Model/master/data/MBTA_Fall_Route_28_Bus_Ridership_2016_2019.csv?token=AQQA7YLQY6CJAE7KMGXKFUK7GSZ7O")
+Route_28<-read_csv("https://raw.githubusercontent.com/jtourkis/MBTA-Ridership-Model/master/data/MBTA_Fall_Route_28_Bus_Ridership_2016_2019.csv")
 
+####Goal: The goal of this notebook is to begin to explore which probability distribution best simulates the process of riders boarding at each stop of a MBTA bus.####
+
+#### Review Density Plots of Data###
 
 plot_28 <- ggplot(Route_28, aes(x=average_ons)) + 
   geom_density()
@@ -17,7 +20,7 @@ plot_28_Peak_AM <- ggplot(Route_28_Peak_AM, aes(x=average_ons)) +
 print(plot_28_Peak_AM)
 
 
-#####Find Route 28 Mode###
+#####Explore characteristics of Peak AM Density Plot###
 
 
 density1<-density(Route_28_Peak_AM$average_ons)
@@ -32,7 +35,9 @@ mean(Route_28_Peak_AM$average_ons)
 
 
 
-####Testing For Negative Binomial Boarding####
+####FINDING DISTRIBUTION OF DATA####
+
+####Review Approx. Range of Values and Counts#####
 
 ####AM Peak####
 
@@ -51,22 +56,26 @@ print(sum_riders_x_frequency)
 print(m)
 
 
-#####Simulate Predicted Values####
+#####SIMULATE PREDICTED VALUES AND COMPARE TO ACTUAL BOARDING VALUES####
 
+
+###SIMULATE GEOMETRIC DISTRIBUTION AND COMPARE###
+# Set seed for reproducibility
+
+####Find MLE Parameter Estimate for Geometric Distribution:
 
 N <- sum(route_28_boarding$Freq)   
 Xn<-mean(Route_28_Peak_AM$average_ons)
 p_MLE<- 1/(Xn+1)
 
-####size is r#####
-####N is sample size
-par(mfrow=c(2,1))
-
+###Simulate###
 # Set seed for reproducibility
 set.seed(13535)  
 y_geom <- rnbinom(N, size = 1, prob = p_MLE) 
 
+par(mfrow=c(2,1))
 
+##Histogram Comparison###
 hist(Route_28_Peak_AM$average_ons, breaks = 11, main="Average Riders at Stops Histogram", xlab="Riders Boarding at Stop",
      ylab="Frequency", sub="MBTA Route 28 Peak AM")
 hist(y_geom,                                          # Plot of randomly drawn nbinom density
@@ -74,10 +83,16 @@ hist(y_geom,                                          # Plot of randomly drawn n
      main = "Geometric Simulation (Using pMLE)", xlab="Predicted Riders Boarding at Stop",
      ylab="Frequency", sub="MBTA Route 28 Peak AM")
 
+
+###SIMULATE POISSON DISTRIBUTION AND COMPARE###
+###Note: Mean is MLE Estimate for Lambda###
+
+###Simulate###
 # Set seed for reproducibility
 set.seed(23533)  
 y_pois<-rpois(n = N, lambda = mean(Route_28_Peak_AM$average_ons)  )
 
+##Histogram Comparison###
 hist(Route_28_Peak_AM$average_ons, breaks = 11, main="Average Riders at Stops Histogram", xlab="Riders Boarding at Stop",
      ylab="Frequency", sub="MBTA Route 28 Peak AM")
 
@@ -87,23 +102,25 @@ hist(y_pois,                                          # Plot of randomly drawn n
      ylab="Frequency", sub="MBTA Route 28 Peak AM")
 
 
-#### Gamma Distribution ######
+###SIMULATE GAMMA DISTRIBUTION AND COMPARE###
+##Use Method of Moments Estimators for Parameters### 
+
 #E(X)=k*theta
 #V(X)=k*theta^2
 #k_hat= Xn^2/S_2
 #theta=S_2/Xn
-
-####Method of Moments Estimators
 
 Xn<-mean(Route_28_Peak_AM$average_ons)
 var_gam<- var(Route_28_Peak_AM$average_ons)
 theta_gam<-var_gam/Xn
 k_gam<-Xn^2/var_gam
 
+###Simulate###
 # Set seed for reproducibility
 set.seed(33525)  
 y_gamma<-rgamma(n = N, shape = k_gam , scale = theta_gam)
 
+##Histogram Comparison###
 hist(Route_28_Peak_AM$average_ons, breaks = 11, main="Average Riders at Stops Histogram", xlab="Riders Boarding at Stop",
      ylab="Frequency", sub="MBTA Route 28 Peak AM")
 
@@ -112,7 +129,9 @@ hist(y_gamma,                                          # Plot of randomly drawn 
      main = "Gamma Simulation (Using Method of Moments)", xlab="Predicted Riders Boarding at Stop",
      ylab="Frequency", sub="MBTA Route 28 Peak AM")
 
-####Negative Binomial####
+###SIMULATE NEGATIVE BINOMIAL DISTRIBUTION AND COMPARE###
+
+##Use Method of Moments Estimators for Parameters###
 
 var_nb<- var(Route_28_Peak_AM$average_ons)
 
@@ -122,10 +141,14 @@ r_MM<- (Xn*(1-p_MM))/p_MM
 
 print(r_MM)
 
+###Simulate###
+
 # Set seed for reproducibility
 set.seed(423535)  
 y_nbinom <- rnbinom(N, size = r_MM, prob = p_MM) 
 
+
+##Histogram Comparison###
 
 hist(Route_28_Peak_AM$average_ons, breaks = 11, main="Average Riders at Stops Histogram", xlab="Riders Boarding at Stop",
      ylab="Frequency", sub="MBTA Route 28 Peak AM")
