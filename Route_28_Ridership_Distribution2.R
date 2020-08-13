@@ -78,7 +78,7 @@ par(mfrow=c(2,1))
 ##Histogram Comparison###
 hist(Route_28_Peak_AM$average_ons, breaks = 11, main="Average Riders at Stops Histogram", xlab="Riders Boarding at Stop",
      ylab="Frequency", sub="MBTA Route 28 Peak AM")
-hist(y_geom,                                          # Plot of randomly drawn nbinom density
+hist(y_geom,                                          # Plot of randomly drawn geom histogram
      breaks = 100,
      main = "Geometric Simulation (Using pMLE)", xlab="Predicted Riders Boarding at Stop",
      ylab="Frequency", sub="MBTA Route 28 Peak AM")
@@ -96,7 +96,7 @@ y_pois<-rpois(n = N, lambda = mean(Route_28_Peak_AM$average_ons)  )
 hist(Route_28_Peak_AM$average_ons, breaks = 11, main="Average Riders at Stops Histogram", xlab="Riders Boarding at Stop",
      ylab="Frequency", sub="MBTA Route 28 Peak AM")
 
-hist(y_pois,                                          # Plot of randomly drawn nbinom density
+hist(y_pois,                                          # Plot of randomly drawn poisson histogram
      breaks = 100,
      main = "Poisson Simulation (Using pMLE)", xlab="Predicted Riders Boarding at Stop",
      ylab="Frequency", sub="MBTA Route 28 Peak AM")
@@ -124,7 +124,7 @@ y_gamma<-rgamma(n = N, shape = k_gam , scale = theta_gam)
 hist(Route_28_Peak_AM$average_ons, breaks = 11, main="Average Riders at Stops Histogram", xlab="Riders Boarding at Stop",
      ylab="Frequency", sub="MBTA Route 28 Peak AM")
 
-hist(y_gamma,                                          # Plot of randomly drawn nbinom density
+hist(y_gamma,                                          # Plot of randomly drawn gamma histogram
      breaks = 11,
      main = "Gamma Simulation (Using Method of Moments)", xlab="Predicted Riders Boarding at Stop",
      ylab="Frequency", sub="MBTA Route 28 Peak AM")
@@ -153,7 +153,7 @@ y_nbinom <- rnbinom(N, size = r_MM, prob = p_MM)
 hist(Route_28_Peak_AM$average_ons, breaks = 11, main="Average Riders at Stops Histogram", xlab="Riders Boarding at Stop",
      ylab="Frequency", sub="MBTA Route 28 Peak AM")
 
-hist(y_nbinom ,                                          # Plot of randomly drawn nbinom density
+hist(y_nbinom ,                                          # Plot of randomly drawn nbinom histogram
      breaks = 100,
      main = "Neg Binom Simulation (Using Method of Moments)", xlab="Predicted Riders Boarding at Stop",
      ylab="Frequency", sub="MBTA Route 28 Peak AM")
