@@ -15,38 +15,8 @@ library(cowplot)
 library(ggplot2)
 
 
-MBTA_Bus<-read_csv("MBTA_Bus_Ridership_by_Time_Period_Season_Route_Line_and_Stop_7_17_Data.csv")
+Route_28<-read_csv("../data/MBTA_Fall_Route_28_Bus_Ridership_2016_2019.csv")
 
-print(MBTA_Bus)
-
-plot <- ggplot(MBTA_Bus, aes(x=average_ons)) + 
-  geom_density()
-print(plot)
-
-
-
-AM_Peak<-filter(MBTA_Bus, time_period_name=="AM_PEAK" )
-print(AM_Peak)
-
-plot_AM <- ggplot(AM_Peak, aes(x=average_ons)) + 
-  geom_density()
-print(plot_AM)
-
-
-table(MBTA_Bus$time_period_name)
-
-PM_Peak<-filter(MBTA_Bus, time_period_name=="PM_PEAK" )
-PM_Peak<-filter(MBTA_Bus, season=="Fall 2019" )
-
-print(PM_Peak)
-
-plot_PM <- ggplot(PM_Peak, aes(x=average_ons)) + 
-  geom_density()
-print(plot_PM)
-
-
-Route_28<-filter(MBTA_Bus, (route_name==28) )
-print(Route_28)
 
 plot_28 <- ggplot(Route_28, aes(x=average_ons)) + 
   geom_density()
@@ -92,12 +62,8 @@ print(sum_riders_x_frequency)
 print(m)
 
 
-
-
-
 #####Simulate Predicted Values####
-# Set seed for reproducibility
-set.seed(53535)  
+
 
 N <- sum(route_28_boarding$Freq)   
 
@@ -105,6 +71,8 @@ N <- sum(route_28_boarding$Freq)
 ####N is sample size
 par(mfrow=c(2,1))
 
+# Set seed for reproducibility
+set.seed(13535)  
 y_geom <- rnbinom(N, size = 1, prob = p_MLE) 
 
 
@@ -115,6 +83,8 @@ hist(y_geom,                                          # Plot of randomly drawn n
      main = "Geometric Simulation (Using pMLE)", xlab="Predicted Riders Boarding at Stop",
         ylab="Frequency", sub="MBTA Route 28 Peak AM")
 
+# Set seed for reproducibility
+set.seed(23533)  
 y_pois<-rpois(n = N, lambda = mean(Route_28_Peak_AM$average_ons)  )
 
 hist(Route_28_Peak_AM$average_ons, breaks = 11, main="Average Riders at Stops Histogram", xlab="Riders Boarding at Stop",
@@ -139,6 +109,8 @@ var_gam<- var(Route_28_Peak_AM$average_ons)
 theta_gam<-var_gam/Xn
 k_gam<-Xn^2/var_gam
 
+# Set seed for reproducibility
+set.seed(33525)  
 y_gamma<-rgamma(n = N, shape = k_gam , scale = theta_gam)
 
 hist(Route_28_Peak_AM$average_ons, breaks = 11, main="Average Riders at Stops Histogram", xlab="Riders Boarding at Stop",
@@ -159,6 +131,8 @@ r_MM<- (Xn*(1-p_MM))/p_MM
 
 print(r_MM)
 
+# Set seed for reproducibility
+set.seed(423535)  
 y_nbinom <- rnbinom(N, size = r_MM, prob = p_MM) 
 
 
