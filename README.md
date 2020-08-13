@@ -49,8 +49,6 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
-
 The project aims to use data from the Massachusetts Bay Transit Authority (MBTA) describing average rider boarding by bus stop, time, and route. The data covers the fall season from 2016 to 2019. I plan to approximate different subsets of MBTA data using a number of statistical techniques, such as maximum likelihood estimation and method of moments.  
 
 ### Built With
