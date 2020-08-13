@@ -14,7 +14,7 @@
   <h3 align="center">MBTA Bus Ridership Model</h3>
 
   <p align="center">
-    The goal of this repository is to explore possible mechanistic models of MBTA bus pickups using various probability distributions and choose the best.
+    The goal of this repository is to explore possible mechanistic models of MBTA bus pickups using various probability distributions.
     <br />
     <a href="https://github.com/jtourkis/MBTA-Ridership-Model"><strong>Explore the docs »</strong></a>
     <br />
@@ -49,7 +49,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-The project uses data from the Massachusetts Bay Transit Authority (MBTA) describing average rider boarding by bus stop, time, and route. The data covers the fall season from 2016 to 2019. I plan to approximate the distribution of different subsets of MBTA data using a number of statistical techniques, such as maximum likelihood estimation and method of moments.  
+The project uses data from the Massachusetts Bay Transit Authority (MBTA) describing average rider boarding by bus stop, time, and route. The data covers fall seasons from 2016 to 2019. I plan to approximate the distribution of different subsets of MBTA data using a number of statistical techniques, such as maximum likelihood estimation and method of moments.  
 
 ### Built With
 
