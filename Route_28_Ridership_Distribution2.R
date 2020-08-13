@@ -152,6 +152,7 @@ y_nbinom <- rnbinom(N, size = r_MM, prob = p_MM)
 
 hist(Route_28_Peak_AM$average_ons, breaks = 11, main="Average Riders at Stops Histogram", xlab="Riders Boarding at Stop",
      ylab="Frequency", sub="MBTA Route 28 Peak AM")
+
 hist(y_nbinom ,                                          # Plot of randomly drawn nbinom density
      breaks = 100,
      main = "Neg Binom Simulation (Using Method of Moments)", xlab="Predicted Riders Boarding at Stop",

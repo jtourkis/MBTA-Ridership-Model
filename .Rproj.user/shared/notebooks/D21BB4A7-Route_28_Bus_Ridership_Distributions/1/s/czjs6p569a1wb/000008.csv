@@ -1,0 +1,5 @@
+"0",""
+"0","Route_28_Peak_AM<-filter(Route_28, time_period_name==""AM_PEAK"" )"
+"0","plot_28_Peak_AM <- ggplot(Route_28_Peak_AM, aes(x=average_ons)) + "
+"0","  geom_density()"
+"0","print(plot_28_Peak_AM)"

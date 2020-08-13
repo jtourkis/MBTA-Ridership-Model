@@ -1,0 +1,5 @@
+"0","hist(y_nbinom ,                                          # Plot of randomly drawn nbinom density"
+"0","     breaks = 100,"
+"0","     main = ""Neg Binom Simulation (Using Method of Moments)"", xlab=""Predicted Riders Boarding at Stop"","
+"0","        ylab=""Frequency"", sub=""MBTA Route 28 Peak AM"")"
+"0",""
