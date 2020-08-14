@@ -157,3 +157,101 @@ hist(y_nbinom ,                                          # Plot of randomly draw
      breaks = 100,
      main = "Neg Binom Simulation (Using Method of Moments)", xlab="Predicted Riders Boarding at Stop",
      ylab="Frequency", sub="MBTA Route 28 Peak AM")
+
+####MIT CHI SQUARED BINNING TEST METHOD#####
+
+actual_round<-data.frame(table(round(Route_28_Peak_AM$average_ons)))
+binom<-data.frame(table(y_nbinom))
+pois<-data.frame(table(y_pois))
+geom<-data.frame(table(y_geom))
+
+####Find P Negative Binomial for Bins using cdf####
+
+#Bins: 0 to .5, .5 to 1.5, 1.5 to 2.5, 2.5 to 3.5, 3.5 to 4.5, 4.5 to 5.5, 5.5 to 6.5, 6.5 to 7.5, 7.5 to 8.5, 8.5 to 9.5, 9.5 to Inf
+nbBin0<-pnbinom(.5, size = r_MM, prob = p_MM, lower.tail = TRUE, log.p = FALSE)
+nbBin1<-pnbinom(1.5, size = r_MM, prob = p_MM, lower.tail = TRUE, log.p = FALSE)-nbBin0
+nbBin2<-pnbinom(2.5, size = r_MM, prob = p_MM, lower.tail = TRUE, log.p = FALSE)-nbBin0-nbBin1
+nbBin3<-pnbinom(3.5, size = r_MM, prob = p_MM, lower.tail = TRUE, log.p = FALSE)-nbBin0-nbBin1-nbBin2
+nbBin4<-pnbinom(4.5, size = r_MM, prob = p_MM, lower.tail = TRUE, log.p = FALSE)-nbBin0-nbBin1-nbBin2-nbBin3
+nbBin5<-pnbinom(5.5, size = r_MM, prob = p_MM, lower.tail = TRUE, log.p = FALSE)-nbBin0-nbBin1-nbBin2-nbBin3-nbBin4
+nbBin6<-pnbinom(6.5, size = r_MM, prob = p_MM, lower.tail = TRUE, log.p = FALSE)-nbBin0-nbBin1-nbBin2-nbBin3-nbBin4-nbBin5
+nbBin7<-pnbinom(7.5, size = r_MM, prob = p_MM, lower.tail = TRUE, log.p = FALSE)-nbBin0-nbBin1-nbBin2-nbBin3-nbBin4-nbBin5-nbBin6
+nbBin8<-pnbinom(8.5, size = r_MM, prob = p_MM, lower.tail = TRUE, log.p = FALSE)-nbBin0-nbBin1-nbBin2-nbBin3-nbBin4-nbBin5-nbBin6-nbBin7
+nbBin9<-pnbinom(9.5, size = r_MM, prob = p_MM, lower.tail = TRUE, log.p = FALSE)-nbBin0-nbBin1-nbBin2-nbBin3-nbBin4-nbBin5-nbBin6-nbBin7-nbBin8
+nbBin10<-pnbinom(9.5, size = r_MM, prob = p_MM, lower.tail = FALSE, log.p = FALSE)
+
+nbPs<-c(nbBin0,nbBin1,nbBin2,nbBin3,nbBin4,nbBin5,nbBin6,nbBin7,nbBin8,nbBin9,nbBin10)
+
+merged_binom2<-merge(binom,actual_round, by.x="y_nbinom", by.y="Var1", all=TRUE)
+merged_binom2$Freq.y[is.na(merged_binom2$Freq.y)] <- 0
+merged_binom2$Freq.x[is.na(merged_binom2$Freq.x)] <- 0
+merged_binom2$total<-N
+merged_binom2$Nj_Rate<-merged_binom2$Freq.y/merged_binom2$total
+merged_binom2$p_Bins<-nbPs
+
+#####Combine Bins Less than 5####
+
+merged_binom2[8,]<-merged_binom2[8,]+merged_binom2[9,]+merged_binom2[10,]+merged_binom2[11,]
+merged_binom2<-merged_binom2[-9:-11,]
+merged_binom2$y_nbinom<-as.numeric(merged_binom2$y_nbinom)
+merged_binom2$y_nbinom[is.na(merged_binom2$y_nbinom)] <- "Bin 7-10"
+  
+print(merged_binom2)
+
+chisq.test(x= merged_binom2$Freq.y, p = merged_binom2$p_Bins)
+#chisq.test(x= merged_binom2$Freq.y, p = merged_binom2$p_Bins, simulate.p.value=TRUE, B=1e6)
+
+
+print("Nbinom MIT Test Stat")
+
+N*sum((merged_binom2$Nj_Rate-merged_binom2$p_Bins)^2/merged_binom2$p_Bins)
+
+
+#####Chi Square Test Geometric Distribution####
+
+####Find P Geometric Distribution for Bins using cdf####
+
+#Bins: 0 to .5, .5 to 1.5, 1.5 to 2.5, 2.5 to 3.5, 3.5 to 4.5, 4.5 to 5.5, 5.5 to 6.5, 6.5 to 7.5, 7.5 to 8.5, 8.5 to 9.5, 9.5 to Inf
+GeomBin0<-pnbinom(.5, size = 1, prob = p_MLE, lower.tail = TRUE, log.p = FALSE)
+GeomBin1<-pnbinom(1.5, size = 1, prob = p_MLE, lower.tail = TRUE, log.p = FALSE)-GeomBin0
+GeomBin2<-pnbinom(2.5, size = 1, prob = p_MLE, lower.tail = TRUE, log.p = FALSE)-GeomBin0-nbBin1
+GeomBin3<-pnbinom(3.5, size = 1, prob = p_MLE, lower.tail = TRUE, log.p = FALSE)-GeomBin0-GeomBin1-GeomBin2
+GeomBin4<-pnbinom(4.5, size = 1, prob = p_MLE, lower.tail = TRUE, log.p = FALSE)-GeomBin0-GeomBin1-GeomBin2-GeomBin3
+GeomBin5<-pnbinom(5.5, size = 1, prob = p_MLE, lower.tail = TRUE, log.p = FALSE)-GeomBin0-GeomBin1-GeomBin2-GeomBin3-GeomBin4
+GeomBin6<-pnbinom(6.5, size = 1, prob = p_MLE, lower.tail = TRUE, log.p = FALSE)-GeomBin0-GeomBin1-GeomBin2-GeomBin3-GeomBin4-GeomBin5
+GeomBin7<-pnbinom(7.5, size = 1, prob = p_MLE, lower.tail = TRUE, log.p = FALSE)-GeomBin0-GeomBin1-GeomBin2-GeomBin3-GeomBin4-GeomBin5-GeomBin6
+GeomBin8<-pnbinom(8.5, size = 1, prob = p_MLE, lower.tail = TRUE, log.p = FALSE)-GeomBin0-GeomBin1-GeomBin2-GeomBin3-GeomBin4-GeomBin5-GeomBin6-GeomBin7
+GeomBin9<-pnbinom(9.5, size = 1, prob = p_MLE, lower.tail = TRUE, log.p = FALSE)-GeomBin0-GeomBin1-GeomBin2-GeomBin3-GeomBin4-GeomBin5-GeomBin6-GeomBin7-GeomBin8
+GeomBin10<-pnbinom(10.5, size = 1, prob = p_MLE, lower.tail = TRUE, log.p = FALSE)-GeomBin0-GeomBin1-GeomBin2-GeomBin3-GeomBin4-GeomBin5-GeomBin6-GeomBin7-GeomBin8-GeomBin9
+GeomBin11<-pnbinom(10.5, size = 1, prob = p_MLE, lower.tail = FALSE, log.p = FALSE)
+
+geomPs<-c(GeomBin0,GeomBin1,GeomBin2,GeomBin3,GeomBin4,GeomBin5,GeomBin6,GeomBin7,GeomBin8,GeomBin9,GeomBin10,GeomBin11)
+
+sum(geomPs)
+
+merged_geom2<-merge(geom,actual_round, by.x="y_geom", by.y="Var1", all=TRUE)
+merged_geom2$Freq.y[is.na(merged_geom2$Freq.y)] <- 0
+merged_geom2$Freq.x[is.na(merged_geom2$Freq.x)] <- 0
+merged_geom2$total<-N
+merged_geom2$Nj_Rate<-merged_geom2$Freq.y/merged_geom2$total
+merged_geom2$p_Bins<-geomPs
+
+
+#####Combine Bins Less than 5####
+
+merged_geom2[7,]<-merged_geom2[7,]+merged_geom2[8,]+merged_geom2[9,]+merged_geom2[10,]+merged_geom2[11,]+merged_geom2[12,]
+merged_geom2<-merged_geom2[-8:-12,]
+merged_geom2$y_geom<-as.numeric(merged_geom2$y_geom)
+merged_geom2$y_geom[is.na(merged_geom2$y_geom)] <- "Bin 6-11"
+
+print(merged_geom2)
+
+
+chisq.test(x= merged_geom2$Freq.y, p = merged_geom2$p_Bins)
+
+#chisq.test(x= merged_geom2$Freq.y, p = merged_geom2$p_Bins, simulate.p.value=TRUE, B=1e6)
+           
+print("Geom MIT Test Stat")
+
+
+N*sum((merged_geom2$Nj_Rate-merged_geom2$p_Bins)^2/merged_geom2$p_Bins)
