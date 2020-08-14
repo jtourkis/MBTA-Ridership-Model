@@ -178,9 +178,11 @@ nbBin6<-pnbinom(6.5, size = r_MM, prob = p_MM, lower.tail = TRUE, log.p = FALSE)
 nbBin7<-pnbinom(7.5, size = r_MM, prob = p_MM, lower.tail = TRUE, log.p = FALSE)-nbBin0-nbBin1-nbBin2-nbBin3-nbBin4-nbBin5-nbBin6
 nbBin8<-pnbinom(8.5, size = r_MM, prob = p_MM, lower.tail = TRUE, log.p = FALSE)-nbBin0-nbBin1-nbBin2-nbBin3-nbBin4-nbBin5-nbBin6-nbBin7
 nbBin9<-pnbinom(9.5, size = r_MM, prob = p_MM, lower.tail = TRUE, log.p = FALSE)-nbBin0-nbBin1-nbBin2-nbBin3-nbBin4-nbBin5-nbBin6-nbBin7-nbBin8
-nbBin10<-pnbinom(9.5, size = r_MM, prob = p_MM, lower.tail = FALSE, log.p = FALSE)
+nbBin10<-pnbinom(10.5, size = r_MM, prob = p_MM, lower.tail = TRUE, log.p = FALSE)-nbBin0-nbBin1-nbBin2-nbBin3-nbBin4-nbBin5-nbBin6-nbBin7-nbBin8-nbBin9
+nbBin11<-pnbinom(11.5, size = r_MM, prob = p_MM, lower.tail = TRUE, log.p = FALSE)-nbBin0-nbBin1-nbBin2-nbBin3-nbBin4-nbBin5-nbBin6-nbBin7-nbBin8-nbBin9-nbBin10
+nbBin12<-pnbinom(11.5, size = r_MM, prob = p_MM, lower.tail = FALSE, log.p = FALSE)
 
-nbPs<-c(nbBin0,nbBin1,nbBin2,nbBin3,nbBin4,nbBin5,nbBin6,nbBin7,nbBin8,nbBin9,nbBin10)
+nbPs<-c(nbBin0,nbBin1,nbBin2,nbBin3,nbBin4,nbBin5,nbBin6,nbBin7,nbBin8,nbBin9,nbBin10,nbBin11,nbBin12)
 
 merged_binom2<-merge(binom,actual_round, by.x="y_nbinom", by.y="Var1", all=TRUE)
 merged_binom2$Freq.y[is.na(merged_binom2$Freq.y)] <- 0
@@ -189,12 +191,14 @@ merged_binom2$total<-N
 merged_binom2$Nj_Rate<-merged_binom2$Freq.y/merged_binom2$total
 merged_binom2$p_Bins<-nbPs
 
+print(merged_binom2)
+
 #####Combine Bins Less than 5####
 
-merged_binom2[8,]<-merged_binom2[8,]+merged_binom2[9,]+merged_binom2[10,]+merged_binom2[11,]
-merged_binom2<-merged_binom2[-9:-11,]
+merged_binom2[7,]<-merged_binom2[7,]+merged_binom2[8,]+merged_binom2[9,]+merged_binom2[10,]+merged_binom2[11,]+merged_binom2[12,]+merged_binom2[13,]
+merged_binom2<-merged_binom2[-8:-13,]
 merged_binom2$y_nbinom<-as.numeric(merged_binom2$y_nbinom)
-merged_binom2$y_nbinom[is.na(merged_binom2$y_nbinom)] <- "Bin 7-10"
+merged_binom2$y_nbinom[is.na(merged_binom2$y_nbinom)] <- "Bin 6-12"
   
 print(merged_binom2)
 
@@ -235,7 +239,7 @@ merged_geom2$Freq.x[is.na(merged_geom2$Freq.x)] <- 0
 merged_geom2$total<-N
 merged_geom2$Nj_Rate<-merged_geom2$Freq.y/merged_geom2$total
 merged_geom2$p_Bins<-geomPs
-
+print(merged_geom2)
 
 #####Combine Bins Less than 5####
 

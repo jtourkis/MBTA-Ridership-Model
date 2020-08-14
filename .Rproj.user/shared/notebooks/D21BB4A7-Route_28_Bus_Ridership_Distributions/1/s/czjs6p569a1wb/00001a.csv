@@ -1,5 +1,0 @@
-"0",""
-"0","hist(y_gamma,                                          # Plot of randomly drawn nbinom density"
-"0","     breaks = 11,"
-"0","     main = ""Gamma Simulation (Using Method of Moments)"", xlab=""Predicted Riders Boarding at Stop"","
-"0","        ylab=""Frequency"", sub=""MBTA Route 28 Peak AM"")"

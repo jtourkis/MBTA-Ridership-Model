@@ -1,8 +1,0 @@
-"0","####Goal: The goal of this notebook is to begin to explore which probability distribution best simulates the process of riders boarding at each stop of a MBTA bus.####"
-"0",""
-"0",""
-"0","#### Review Density Plots of Data###"
-"0",""
-"0","plot_28 <- ggplot(Route_28, aes(x=average_ons)) + "
-"0","  geom_density()"
-"0","print(plot_28)"

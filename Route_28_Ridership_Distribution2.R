@@ -45,16 +45,6 @@ route_28_boarding<-data.frame(table(round(Route_28_Peak_AM$average_ons)))
 route_28_boarding$Var1<-as.numeric(route_28_boarding$Var1)
 print(route_28_boarding)
 
-#####Estimated Mean#####
-riders_x_frequency<-route_28_boarding$Freq*route_28_boarding$Var1
-riders_squared<-route_28_boarding$Var1^2
-
-
-m<- sum(sum_riders_x_frequency)/sum(route_28_boarding$Freq)
-
-print(sum_riders_x_frequency)
-print(m)
-
 
 #####SIMULATE PREDICTED VALUES AND COMPARE TO ACTUAL BOARDING VALUES####
 

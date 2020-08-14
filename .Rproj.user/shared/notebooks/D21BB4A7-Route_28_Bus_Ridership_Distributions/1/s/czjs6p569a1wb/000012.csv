@@ -1,4 +1,0 @@
-"0","hist(y_geom,                                          # Plot of randomly drawn nbinom density"
-"0","     breaks = 100,"
-"0","     main = ""Geometric Simulation (Using pMLE)"", xlab=""Predicted Riders Boarding at Stop"","
-"0","        ylab=""Frequency"", sub=""MBTA Route 28 Peak AM"")"
