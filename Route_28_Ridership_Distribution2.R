@@ -148,6 +148,23 @@ hist(y_nbinom ,                                          # Plot of randomly draw
      main = "Neg Binom Simulation (Using Method of Moments)", xlab="Predicted Riders Boarding at Stop",
      ylab="Frequency", sub="MBTA Route 28 Peak AM")
 
+#####GAMMA KOLMOGOROV SMIRNOV TEST####
+
+gamma_sim<-y_gamma
+actual<- Route_28_Peak_AM$average_ons
+
+
+ks.test(gamma_sim, actual)
+
+###H0 is the two distributions are equal.
+## P-Value < 0.05 (significance level), reject that they are drawn from same distribution.
+## D greater than critical value reject null. 
+
+###n=292
+#Significance level:  α = 0.001
+#Over 50 Critical value:  1.94947   
+#Critical region:  Reject H0 if D > 1.94947
+
 ####MIT CHI SQUARED BINNING TEST METHOD#####
 
 actual_round<-data.frame(table(round(Route_28_Peak_AM$average_ons)))
