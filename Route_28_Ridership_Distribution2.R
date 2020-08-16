@@ -436,21 +436,23 @@ print("Total Riders Deviation:")
 Actual_Total-geom_Pred_Total
 
 # "Gamma Distribution Accuracy in 1000 Simulations:"
-
 # "Accurate Category Prediction:"
 #0.7738467
 # "Total Riders Deviation:"
 # 1164
+
 #  "Poisson Distribution Accuracy in 1000 Simulations:"
 # "Accurate Category Prediction:"
 # 0.7702441
 # "Total Riders Deviation:"
 # -7835
+
 # "Negative Binomial Distribution Accuracy in 1000 Simulations:"
 # "Accurate Category Prediction:"
 # 0.7452268
 # "Total Riders Deviation:"
 # -43385
+
 # "Geometric Distribution Accuracy in 1000 Simulations:"
 # "Accurate Category Prediction:"
 # 0.6846381
