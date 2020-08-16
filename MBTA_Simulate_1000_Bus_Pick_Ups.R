@@ -253,13 +253,13 @@ print("Gamma Distribution Accuracy in 1000 Simulations:")
 print("Accurate Category Prediction:")
 print(gamma_accuracy)
 
-print("Estimated Total Missed Riders in 1000 Simulations (Rounded Avg Boarding/Rounded Gamma):")
+print("Estimated Total Missed Riders in 1000 Simulations (Rounded Avg Boarding/Rounded Gamma Comparison):")
 Actual_Total-gamma_Pred_Total
 
 print("Model Bias:")
 print(mean(missed_riders_gamma))
 
-print("Estimated Total Missed Riders in 1000 Simulations of N (Rounded Avg Boarding/Rounded Gamma):")
+print("Estimated Total Missed Riders in 1000 Simulations of N (Rounded Avg Boarding/Rounded Gamma Comparison):")
 sum(missed_riders_gamma)
 
 print("Poisson Distribution Accuracy in 1000 Simulations:")
@@ -267,13 +267,13 @@ print("Poisson Distribution Accuracy in 1000 Simulations:")
 print("Accurate Category Prediction:")
 print(pois_accuracy)
 
-print("Estimated Total Missed Riders in 1000 Simulations (Rounded Avg Boarding):")
+print("Estimated Total Missed Riders in 1000 Simulations (Rounded Avg Boarding Comparison):")
 Actual_Total-pois_Pred_Total
 
 print("Model Bias:")
 print(mean(missed_riders_pois))
 
-print("Estimated Total Missed Riders in 1000 Simulations of N (Avg Boarding):")
+print("Estimated Total Missed Riders in 1000 Simulations of N (Avg Boarding Comparison):")
 sum(missed_riders_pois)
 
 print("Negative Binomial Distribution Accuracy in 1000 Simulations:")
@@ -281,14 +281,14 @@ print("Negative Binomial Distribution Accuracy in 1000 Simulations:")
 print("Accurate Category Prediction:")
 print(nbin_accuracy)
 
-print("Estimated Total Missed Riders in 1000 Simulations (Rounded Avg Boarding):")
+print("Estimated Total Missed Riders in 1000 Simulations (Rounded Avg Boarding Comparison):")
 Actual_Total-nbin_Pred_Total
 
 print("Model Bias:")
 
 print(mean(missed_riders_nbin))
 
-print("Estimated Total Missed Riders in 1000 Simulations of N (Avg Boarding):")
+print("Estimated Total Missed Riders in 1000 Simulations of N (Avg Boarding Comparison):")
 sum(missed_riders_nbin)
 
 print("Geometric Distribution Accuracy in 1000 Simulations:")
@@ -296,14 +296,14 @@ print("Geometric Distribution Accuracy in 1000 Simulations:")
 print("Accurate Category Prediction:")
 print(geom_accuracy)
 
-print("Estimated Total Missed Riders in 1000 Simulations (Rounded Avg Boarding):")
+print("Estimated Total Missed Riders in 1000 Simulations (Rounded Avg Boarding Comparison):")
 Actual_Total-geom_Pred_Total
 
 print("Model Bias:")
 
 print(mean(missed_riders_geom))
 
-print("Estimated Total Missed Riders in 1000 Simulations of N (Avg Boarding):")
+print("Estimated Total Missed Riders in 1000 Simulations of N (Avg Boarding Comparison):")
 sum(missed_riders_geom)
 
 ####Plot Distribution of Estimated Per Sumulation Bias (Number of Riders Missed)#####
@@ -322,39 +322,39 @@ lines(density(missed_riders_geom), col = "darkblue", lwd = 2)
 # "Gamma Distribution Accuracy in 1000 Simulations:"
 # "Accurate Category Prediction:"
 #0.7738467
-# "Estimated Total Missed Riders in 1000 Simulations (Rounded Avg Boarding/Rounded Gamma):"
+# "Estimated Total Missed Riders in 1000 Simulations (Rounded Avg Boarding/Rounded Gamma Comparison):"
 # 1164
 # "Est. Model Bias:"
 # -1.164
-# "Estimated Total Missed Riders in 1000 Simulations of N (Rounded Avg Boarding/Rounded Gamma):"
+# "Estimated Total Missed Riders in 1000 Simulations of N (Rounded Avg Boarding/Rounded Gamma Comparison):"
 # -1164
 
 #  "Poisson Distribution Accuracy in 1000 Simulations:"
 # "Accurate Category Prediction:"
 # 0.7702441
-# "Estimated Total Missed Riders in 1000 Simulations (Rounded Avg Boarding):"
+# "Estimated Total Missed Riders in 1000 Simulations (Rounded Avg Boarding Comparison):"
 # -7835
 # "Est. Model Bias:"
 # -1.015
-# "Estimated Total Missed Riders in 1000 Simulations of N (Avg Boarding):"
+# "Estimated Total Missed Riders in 1000 Simulations of N (Avg Boarding Comparison):"
 # -1015
 
 # "Negative Binomial Distribution Accuracy in 1000 Simulations:"
 # "Accurate Category Prediction:"
 # 0.7452268
-# "Estimated Total Missed Riders in 1000 Simulations (Rounded Avg Boarding):"
+# "Estimated Total Missed Riders in 1000 Simulations (Rounded Avg Boarding Comparison):"
 # -43385
 # "Est. Model Bias:"
 # 34.535
-#"Estimated Total Missed Riders in 1000 Simulations of N (Avg Boarding):"
+#"Estimated Total Missed Riders in 1000 Simulations of N (Avg Boarding Comparison):"
 #34535
 
 # "Geometric Distribution Accuracy in 1000 Simulations:"
 # "Accurate Category Prediction:"
 # 0.6846381
-# "Estimated Total Missed Riders in 1000 Simulations (Rounded Avg Boarding):"
+# "Estimated Total Missed Riders in 1000 Simulations (Rounded Avg Boarding Comparison):"
 # -9101
 # "Est. Model Bias:"
 # 0.251
-# "Estimated Total Missed Riders in 1000 Simulations of N (Avg Boarding):"
+# "Estimated Total Missed Riders in 1000 Simulations of N (Avg Boarding Comparison):"
 # 251
