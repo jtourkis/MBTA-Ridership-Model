@@ -1,0 +1,26 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1597287822802.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "39098673",
+    "lastKnownWriteTime" : 1597603784,
+    "last_content_update" : 1597603784,
+    "path" : "~/Desktop/MIT_IDSS_Meetings/Transit_Authority_Bus_Data/MBTA-Ridership-Model/Route_28_Ridership_Distribution2.R",
+    "project_path" : "Route_28_Ridership_Distribution2.R",
+    "properties" : {
+        "cursorPosition" : "16,35",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
