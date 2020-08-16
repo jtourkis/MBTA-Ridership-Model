@@ -257,6 +257,9 @@ Actual_Total-gamma_Pred_Total
 print("Est. Model Bias:")
 print(mean(missed_riders_gamma))
 
+print("Estimated Total Missed Riders in 1000 Simulations of N")
+sum(missed_riders_gamma)
+
 print("Poisson Distribution Accuracy in 1000 Simulations:")
 
 print("Accurate Category Prediction:")
@@ -267,6 +270,10 @@ Actual_Total-pois_Pred_Total
 
 print("Est. Model Bias:")
 print(mean(missed_riders_pois))
+
+print("Estimated Total Missed Riders in 1000 Simulations of N")
+sum(missed_riders_pois)
+
 
 print("Negative Binomial Distribution Accuracy in 1000 Simulations:")
 
@@ -280,6 +287,9 @@ print("Est. Model Bias:")
 
 print(mean(missed_riders_nbin))
 
+print("Estimated Total Missed Riders in 1000 Simulations of N")
+sum(missed_riders_nbin)
+
 print("Geometric Distribution Accuracy in 1000 Simulations:")
 
 print("Accurate Category Prediction:")
@@ -290,6 +300,9 @@ Actual_Total-geom_Pred_Total
 
 print("Est. Model Bias:")
 print(mean(missed_riders_geom))
+
+print("Estimated Total Missed Riders in 1000 Simulations of N")
+sum(missed_riders_geom)
 
 ####Plot Distribution of Estimated Per Sumulation Bias (Number of Riders Missed)#####
 hist(missed_riders_gamma, main = "", xlab = "Gamma Missed Riders Per Simulation", prob = T, col = "darkred")
@@ -311,6 +324,8 @@ lines(density(missed_riders_geom), col = "darkblue", lwd = 2)
 # 1164
 # "Est. Model Bias:"
 # -10.014
+# "Estimated Total Missed Riders in 1000 Simulations of N"
+# -10014
 
 #  "Poisson Distribution Accuracy in 1000 Simulations:"
 # "Accurate Category Prediction:"
@@ -319,6 +334,8 @@ lines(density(missed_riders_geom), col = "darkblue", lwd = 2)
 # -7835
 # "Est. Model Bias:"
 # -1.015
+# "Estimated Total Missed Riders in 1000 Simulations of N"
+# -1015
 
 # "Negative Binomial Distribution Accuracy in 1000 Simulations:"
 # "Accurate Category Prediction:"
@@ -327,6 +344,8 @@ lines(density(missed_riders_geom), col = "darkblue", lwd = 2)
 # -43385
 # "Est. Model Bias:"
 # 34.535
+#"Estimated Total Missed Riders in 1000 Simulations of N"
+#34535
 
 # "Geometric Distribution Accuracy in 1000 Simulations:"
 # "Accurate Category Prediction:"
@@ -335,3 +354,5 @@ lines(density(missed_riders_geom), col = "darkblue", lwd = 2)
 # -9101
 # "Est. Model Bias:"
 # 0.251
+# "Estimated Total Missed Riders in 1000 Simulations of N"
+# 251
