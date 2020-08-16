@@ -6,7 +6,7 @@ library(ggplot2)
 
 Route_28<-read_csv("https://raw.githubusercontent.com/jtourkis/MBTA-Ridership-Model/master/data/MBTA_Fall_Route_28_Bus_Ridership_2016_2019.csv")
 
-####Goal: The goal of this notebook is to begin to explore which probability distribution best simulates the process of riders boarding at each stop of a MBTA bus.####
+####Goal: Explore whether various probability distributions are suitable to simulate the process of riders boarding an MBTA bus.####
 
 #### Review Density Plots of Data###
 
