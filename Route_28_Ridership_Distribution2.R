@@ -285,10 +285,10 @@ deviation<-gamma_x_df2-t(avg_boarding)
 missed_riders_gamma<-as.matrix(colSums(deviation))
 #sum(deviation$X1)
 
-####Plot Distribution of Misses#####
+####Plot Distribution of Estimated Per Sumulation Bias (Number of Riders Missed)#####
 
-hist(missed_riders_gamma, main = "", xlab = "Gamma Missed Riders Per Simulation", prob = T, col = "darkred")
-lines(density(missed_riders_gamma), col = "darkblue", lwd = 2)
+#hist(missed_riders_gamma, main = "", xlab = "Gamma Missed Riders Per Simulation", prob = T, col = "darkred")
+#lines(density(missed_riders_gamma), col = "darkblue", lwd = 2)
 
 ##########CREATE TABLE OF COUNTS FOR EACH CATEGORY######
 
@@ -337,9 +337,9 @@ deviation<-pois_x_df2-t(avg_boarding)
 missed_riders_pois<-as.matrix(colSums(deviation))
 #sum(deviation$X1)
 
-####Plot Distribution of Misses#####
-hist(missed_riders_pois, main = "", xlab = "Poisson Missed Riders Per Simulation", prob = T, col = "darkred")
-lines(density(missed_riders_pois), col = "darkblue", lwd = 2)
+####Plot Distribution of Estimated Per Sumulation Bias (Number of Riders Missed)#####
+#hist(missed_riders_pois, main = "", xlab = "Poisson Missed Riders Per Simulation", prob = T, col = "darkred")
+#lines(density(missed_riders_pois), col = "darkblue", lwd = 2)
 
 ##########CREATE TABLE OF COUNTS FOR EACH CATEGORY######
 
@@ -388,9 +388,9 @@ deviation<-nbin_x_df2-t(avg_boarding)
 missed_riders_nbin<-as.matrix(colSums(deviation))
 #sum(deviation$X1)
 
-####Plot Distribution of Misses#####
-hist(missed_riders_nbin, main = "", xlab = "Negative Binomial Missed Riders Per Simulation", prob = T, col = "darkred")
-lines(density(missed_riders_nbin), col = "darkblue", lwd = 2)
+####Plot Distribution of Estimated Per Sumulation Bias (Number of Riders Missed)#####
+#hist(missed_riders_nbin, main = "", xlab = "Negative Binomial Missed Riders Per Simulation", prob = T, col = "darkred")
+#lines(density(missed_riders_nbin), col = "darkblue", lwd = 2)
 
 ##########CREATE TABLE OF COUNTS FOR EACH CATEGORY######
 
@@ -437,9 +437,9 @@ deviation<-geom_x_df2-t(avg_boarding)
 missed_riders_geom<-as.matrix(colSums(deviation))
 #sum(deviation$X1)
 
-####Plot Distribution of Misses#####
-hist(missed_riders_geom, main = "", xlab = "Geometric Missed Riders Per Simulation", prob = T, col = "darkred")
-lines(density(missed_riders_geom), col = "darkblue", lwd = 2)
+####Plot Distribution of Estimated Per Sumulation Bias (Number of Riders Missed)#####
+#hist(missed_riders_geom, main = "", xlab = "Geometric Missed Riders Per Simulation", prob = T, col = "darkred")
+#lines(density(missed_riders_geom), col = "darkblue", lwd = 2)
 
 ##########CREATE TABLE OF COUNTS FOR EACH CATEGORY######
 
@@ -479,7 +479,7 @@ print(gamma_accuracy)
 print("Total Riders Deviation:")
 Actual_Total-gamma_Pred_Total
 
-print("Model Bias:")
+print("Est. Model Bias:")
 print(mean(missed_riders_gamma))
 
 print("Poisson Distribution Accuracy in 1000 Simulations:")
@@ -490,7 +490,7 @@ print(pois_accuracy)
 print("Total Riders Deviation:")
 Actual_Total-pois_Pred_Total
 
-print("Model Bias:")
+print("Est. Model Bias:")
 print(mean(missed_riders_pois))
 
 print("Negative Binomial Distribution Accuracy in 1000 Simulations:")
@@ -501,7 +501,7 @@ print(nbin_accuracy)
 print("Total Riders Deviation:")
 Actual_Total-nbin_Pred_Total
 
-print("Model Bias:")
+print("Est. Model Bias:")
 
 print(mean(missed_riders_nbin))
 
@@ -513,10 +513,10 @@ print(geom_accuracy)
 print("Total Riders Deviation:")
 Actual_Total-geom_Pred_Total
 
-print("Model Bias:")
+print("Est. Model Bias:")
 print(mean(missed_riders_geom))
 
-####Plot Distribution of Total Rider Bias#####
+####Plot Distribution of Estimated Per Sumulation Bias (Number of Riders Missed)#####
 hist(missed_riders_gamma, main = "", xlab = "Gamma Missed Riders Per Simulation", prob = T, col = "darkred")
 lines(density(missed_riders_gamma), col = "darkblue", lwd = 2)
 
