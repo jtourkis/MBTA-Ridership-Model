@@ -33,7 +33,7 @@ k_gam<-Xn^2/var_gam
 #####Get a Matrix of Estimates###
 ####1000 Columns with N Simulations From The Gamma Distribution######
 
-avg_boarding<- data.frame(Route_28_Peak_AM$average_ons)
+avg_boarding<- data.frame(round(Route_28_Peak_AM$average_ons))
 
 set.seed(13)
 gamma_x<-replicate(n = 1000, 
@@ -81,6 +81,8 @@ gamma_Pred_Total<-sum(Accuracy_df$Freq.x*Accuracy_df$gamma_x)
 abs(Actual_Total-gamma_Pred_Total)
 
 ######POISSON DISTRIBUTION#####
+
+avg_boarding<- data.frame(Route_28_Peak_AM$average_ons)
 
 #####Get a Matrix of Estimates###
 ####1000 Columns with N Simulations From The Poisson Distribution######
@@ -251,13 +253,13 @@ print("Gamma Distribution Accuracy in 1000 Simulations:")
 print("Accurate Category Prediction:")
 print(gamma_accuracy)
 
-print("Total Riders Deviation:")
+print("Estimated Total Missed Riders in 1000 Simulations (Rounded Avg Bording/Rounded Gamma):")
 Actual_Total-gamma_Pred_Total
 
-print("Est. Model Bias:")
+print("Model Bias:")
 print(mean(missed_riders_gamma))
 
-print("Estimated Total Missed Riders in 1000 Simulations of N")
+print("Estimated Total Missed Riders in 1000 Simulations of N (Rounded Avg Bording/Rounded Gamma)")
 sum(missed_riders_gamma)
 
 print("Poisson Distribution Accuracy in 1000 Simulations:")
@@ -265,25 +267,24 @@ print("Poisson Distribution Accuracy in 1000 Simulations:")
 print("Accurate Category Prediction:")
 print(pois_accuracy)
 
-print("Total Riders Deviation:")
+print("Estimated Total Missed Riders in 1000 Simulations (Rounded Avg Bording):")
 Actual_Total-pois_Pred_Total
 
-print("Est. Model Bias:")
+print("Model Bias:")
 print(mean(missed_riders_pois))
 
-print("Estimated Total Missed Riders in 1000 Simulations of N")
+print("Estimated Total Missed Riders in 1000 Simulations of N (Avg Bording)")
 sum(missed_riders_pois)
-
 
 print("Negative Binomial Distribution Accuracy in 1000 Simulations:")
 
 print("Accurate Category Prediction:")
 print(nbin_accuracy)
 
-print("Total Riders Deviation:")
+print("Estimated Total Missed Riders in 1000 Simulations (Rounded Avg Bording):")
 Actual_Total-nbin_Pred_Total
 
-print("Est. Model Bias:")
+print("Model Bias:")
 
 print(mean(missed_riders_nbin))
 
@@ -295,13 +296,14 @@ print("Geometric Distribution Accuracy in 1000 Simulations:")
 print("Accurate Category Prediction:")
 print(geom_accuracy)
 
-print("Total Riders Deviation:")
+print("Estimated Total Missed Riders in 1000 Simulations (Rounded Avg Bording):")
 Actual_Total-geom_Pred_Total
 
-print("Est. Model Bias:")
+print("Model Bias:")
+
 print(mean(missed_riders_geom))
 
-print("Estimated Total Missed Riders in 1000 Simulations of N")
+print("Estimated Total Missed Riders in 1000 Simulations of N (Avg Boarding)")
 sum(missed_riders_geom)
 
 ####Plot Distribution of Estimated Per Sumulation Bias (Number of Riders Missed)#####
@@ -323,9 +325,9 @@ lines(density(missed_riders_geom), col = "darkblue", lwd = 2)
 # "Total Riders Deviation:"
 # 1164
 # "Est. Model Bias:"
-# -10.014
+# -1.164
 # "Estimated Total Missed Riders in 1000 Simulations of N"
-# -10014
+# -1164
 
 #  "Poisson Distribution Accuracy in 1000 Simulations:"
 # "Accurate Category Prediction:"
