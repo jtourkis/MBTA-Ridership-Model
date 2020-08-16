@@ -259,7 +259,7 @@ Actual_Total-gamma_Pred_Total
 print("Model Bias:")
 print(mean(missed_riders_gamma))
 
-print("Estimated Total Missed Riders in 1000 Simulations of N (Rounded Avg Bording/Rounded Gamma)")
+print("Estimated Total Missed Riders in 1000 Simulations of N (Rounded Avg Bording/Rounded Gamma):")
 sum(missed_riders_gamma)
 
 print("Poisson Distribution Accuracy in 1000 Simulations:")
@@ -273,7 +273,7 @@ Actual_Total-pois_Pred_Total
 print("Model Bias:")
 print(mean(missed_riders_pois))
 
-print("Estimated Total Missed Riders in 1000 Simulations of N (Avg Bording)")
+print("Estimated Total Missed Riders in 1000 Simulations of N (Avg Bording):")
 sum(missed_riders_pois)
 
 print("Negative Binomial Distribution Accuracy in 1000 Simulations:")
@@ -288,7 +288,7 @@ print("Model Bias:")
 
 print(mean(missed_riders_nbin))
 
-print("Estimated Total Missed Riders in 1000 Simulations of N")
+print("Estimated Total Missed Riders in 1000 Simulations of N (Avg Bording):")
 sum(missed_riders_nbin)
 
 print("Geometric Distribution Accuracy in 1000 Simulations:")
@@ -303,7 +303,7 @@ print("Model Bias:")
 
 print(mean(missed_riders_geom))
 
-print("Estimated Total Missed Riders in 1000 Simulations of N (Avg Boarding)")
+print("Estimated Total Missed Riders in 1000 Simulations of N (Avg Boarding):")
 sum(missed_riders_geom)
 
 ####Plot Distribution of Estimated Per Sumulation Bias (Number of Riders Missed)#####
@@ -322,39 +322,39 @@ lines(density(missed_riders_geom), col = "darkblue", lwd = 2)
 # "Gamma Distribution Accuracy in 1000 Simulations:"
 # "Accurate Category Prediction:"
 #0.7738467
-# "Total Riders Deviation:"
+# "Estimated Total Missed Riders in 1000 Simulations (Rounded Avg Bording/Rounded Gamma):"
 # 1164
 # "Est. Model Bias:"
 # -1.164
-# "Estimated Total Missed Riders in 1000 Simulations of N"
+# "Estimated Total Missed Riders in 1000 Simulations of N (Rounded Avg Bording/Rounded Gamma):"
 # -1164
 
 #  "Poisson Distribution Accuracy in 1000 Simulations:"
 # "Accurate Category Prediction:"
 # 0.7702441
-# "Total Riders Deviation:"
+# "Estimated Total Missed Riders in 1000 Simulations (Rounded Avg Bording):"
 # -7835
 # "Est. Model Bias:"
 # -1.015
-# "Estimated Total Missed Riders in 1000 Simulations of N"
+# "Estimated Total Missed Riders in 1000 Simulations of N (Avg Bording):"
 # -1015
 
 # "Negative Binomial Distribution Accuracy in 1000 Simulations:"
 # "Accurate Category Prediction:"
 # 0.7452268
-# "Total Riders Deviation:"
+# "Estimated Total Missed Riders in 1000 Simulations (Rounded Avg Bording):"
 # -43385
 # "Est. Model Bias:"
 # 34.535
-#"Estimated Total Missed Riders in 1000 Simulations of N"
+#"Estimated Total Missed Riders in 1000 Simulations of N (Avg Bording):"
 #34535
 
 # "Geometric Distribution Accuracy in 1000 Simulations:"
 # "Accurate Category Prediction:"
 # 0.6846381
-# "Total Riders Deviation:"
+# "Estimated Total Missed Riders in 1000 Simulations (Rounded Avg Bording):"
 # -9101
 # "Est. Model Bias:"
 # 0.251
-# "Estimated Total Missed Riders in 1000 Simulations of N"
+# "Estimated Total Missed Riders in 1000 Simulations of N (Avg Boarding):"
 # 251
