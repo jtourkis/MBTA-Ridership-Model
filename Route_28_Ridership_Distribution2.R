@@ -273,6 +273,7 @@ print(actual_round_1000)
 
 #####Get a Matrix of Estimates###
 ####1000 Columns with N Simulations From The Gamma Distribution######
+avg_boarding<- data.frame(Route_28_Peak_AM$average_ons)
 
 set.seed(13)
 gamma_x<-replicate(n = 1000, 
