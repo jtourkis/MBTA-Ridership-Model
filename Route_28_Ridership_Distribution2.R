@@ -6,7 +6,9 @@ library(ggplot2)
 
 Route_28<-read_csv("https://raw.githubusercontent.com/jtourkis/MBTA-Ridership-Model/master/data/MBTA_Fall_Route_28_Bus_Ridership_2016_2019.csv")
 
-####Goal: Explore whether various probability distributions are suitable to simulate the process of riders boarding an MBTA bus.####
+####Goal: Preliminary Exploration of whether various probability distributions are suitable to simulate the process of riders boarding an MBTA bus.####
+#####Distributions Explored: Gamma, Geometric, Negative Binomial, and Poisson. 
+####Tests Performed:  KOLMOGOROV SMIRNOV and CHI SQUARED
 
 #### Review Density Plots of Data###
 
