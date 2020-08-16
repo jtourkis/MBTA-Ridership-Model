@@ -534,7 +534,7 @@ lines(density(missed_riders_geom), col = "darkblue", lwd = 2)
 #0.7738467
 # "Total Riders Deviation:"
 # 1164
-# "Model Bias:"
+# "Est. Model Bias:"
 # -10.014
 
 #  "Poisson Distribution Accuracy in 1000 Simulations:"
@@ -542,7 +542,7 @@ lines(density(missed_riders_geom), col = "darkblue", lwd = 2)
 # 0.7702441
 # "Total Riders Deviation:"
 # -7835
-# "Model Bias:"
+# "Est. Model Bias:"
 # -1.015
 
 # "Negative Binomial Distribution Accuracy in 1000 Simulations:"
@@ -550,7 +550,7 @@ lines(density(missed_riders_geom), col = "darkblue", lwd = 2)
 # 0.7452268
 # "Total Riders Deviation:"
 # -43385
-# "Model Bias:"
+# "Est. Model Bias:"
 # 34.535
 
 # "Geometric Distribution Accuracy in 1000 Simulations:"
@@ -558,5 +558,5 @@ lines(density(missed_riders_geom), col = "darkblue", lwd = 2)
 # 0.6846381
 # "Total Riders Deviation:"
 # -9101
-# "Model Bias:"
+# "Est. Model Bias:"
 # 0.251
