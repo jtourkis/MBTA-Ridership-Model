@@ -269,6 +269,7 @@ actual_round_1000<-data.frame(table(round(Route_28_Peak_AM$average_ons)))
 actual_round_1000$ActualFreqx1000<-actual_round_1000$Freq*1000
 print(actual_round_1000)
 
+####GAMMA DISTRIBUTION######
 
 #####Get a Matrix of Estimates###
 ####1000 Columns with N Simulations From The Gamma Distribution######
@@ -276,6 +277,21 @@ print(actual_round_1000)
 set.seed(13)
 gamma_x<-replicate(n = 1000, 
           round(rgamma(n = N, shape = k_gam , scale = theta_gam) ))
+
+gamma_x_df2<-data.frame(gamma_x)
+
+deviation<-gamma_x_df2-t(avg_boarding)
+
+missed_riders_gamma<-as.matrix(colSums(deviation))
+#sum(deviation$X1)
+
+####Plot Distribution of Misses#####
+
+hist(missed_riders_gamma, main = "", xlab = "Gamma Missed Riders Per Simulation", prob = T, col = "darkred")
+lines(density(missed_riders_gamma), col = "darkblue", lwd = 2)
+
+##########CREATE TABLE OF COUNTS FOR EACH CATEGORY######
+
 predicted_1000<-data.frame(table(gamma_x))
 
 Accuracy_df<-merge(predicted_1000,actual_round_1000, by.x="gamma_x", by.y="Var1", all=TRUE)
@@ -293,10 +309,7 @@ num_incorrect<-sum(abs(Accuracy_df$ActualFreqx1000-Accuracy_df$Freq.x))
 
 gamma_accuracy<-num_correct/(num_correct+num_incorrect)
   
-  
 print(gamma_accuracy)
-
-
 
 ####Calculate the number of people off:
 
@@ -306,12 +319,30 @@ gamma_Pred_Total<-sum(Accuracy_df$Freq.x*Accuracy_df$gamma_x)
 
 abs(Actual_Total-gamma_Pred_Total)
 
+######POISSON DISTRIBUTION#####
+
 #####Get a Matrix of Estimates###
 ####1000 Columns with N Simulations From The Poisson Distribution######
 
 set.seed(14)
 pois_x<-replicate(n = 1000, 
           rpois(n = N, lambda = mean(Route_28_Peak_AM$average_ons)))
+
+####Missed Riders
+
+pois_x_df2<-data.frame(pois_x)
+
+deviation<-pois_x_df2-t(avg_boarding)
+
+missed_riders_pois<-as.matrix(colSums(deviation))
+#sum(deviation$X1)
+
+####Plot Distribution of Misses#####
+hist(missed_riders_pois, main = "", xlab = "Poisson Missed Riders Per Simulation", prob = T, col = "darkred")
+lines(density(missed_riders_pois), col = "darkblue", lwd = 2)
+
+##########CREATE TABLE OF COUNTS FOR EACH CATEGORY######
+
 pois_predicted_1000<-data.frame(table(pois_x))
 
 Accuracy_df<-merge(pois_predicted_1000,actual_round_1000, by.x="pois_x", by.y="Var1", all=TRUE)
@@ -338,12 +369,31 @@ pois_Pred_Total<-sum(Accuracy_df$Freq.x*Accuracy_df$pois_x)
 
 abs(Actual_Total-pois_Pred_Total)
 
+
+##### NEGATIVE BINOMIAL DISTRIBUTION####
+
 #####Get a Matrix of Estimates###
 ####1000 Columns with N Simulations From The NBinom Distribution######
 
 set.seed(15)
 nbin_x<-replicate(n = 1000, 
           rnbinom(N, size = r_MM, prob = p_MM))
+
+####Missed Riders
+
+nbin_x_df2<-data.frame(nbin_x)
+
+deviation<-nbin_x_df2-t(avg_boarding)
+
+missed_riders_nbin<-as.matrix(colSums(deviation))
+#sum(deviation$X1)
+
+####Plot Distribution of Misses#####
+hist(missed_riders_nbin, main = "", xlab = "Negative Binomial Missed Riders Per Simulation", prob = T, col = "darkred")
+lines(density(missed_riders_nbin), col = "darkblue", lwd = 2)
+
+##########CREATE TABLE OF COUNTS FOR EACH CATEGORY######
+
 nbin_predicted_1000<-data.frame(table(nbin_x))
 
 Accuracy_df<-merge(nbin_predicted_1000,actual_round_1000, by.x="nbin_x", by.y="Var1", all=TRUE)
@@ -368,12 +418,30 @@ print(nbin_accuracy)
 
 nbin_Pred_Total<-sum(Accuracy_df$Freq.x*Accuracy_df$nbin_x)
 abs(Actual_Total-nbin_Pred_Total)
+
+######GEOMETRIC DISTRIBUTION#####
+
 #####Get a Matrix of Estimates###
 ####1000 Columns with N Simulations From The Geom Distribution######
 
 set.seed(17)
 geom_x<-replicate(n = 1000, 
           rnbinom(N, size = 1, prob = p_MLE))
+
+####Missed Riders
+
+geom_x_df2<-data.frame(geom_x)
+
+deviation<-geom_x_df2-t(avg_boarding)
+
+missed_riders_geom<-as.matrix(colSums(deviation))
+#sum(deviation$X1)
+
+####Plot Distribution of Misses#####
+hist(missed_riders_geom, main = "", xlab = "Geometric Missed Riders Per Simulation", prob = T, col = "darkred")
+lines(density(missed_riders_geom), col = "darkblue", lwd = 2)
+
+##########CREATE TABLE OF COUNTS FOR EACH CATEGORY######
 
 geom_predicted_1000<-data.frame(table(geom_x))
 
@@ -411,6 +479,9 @@ print(gamma_accuracy)
 print("Total Riders Deviation:")
 Actual_Total-gamma_Pred_Total
 
+print("Model Bias:")
+print(mean(missed_riders_gamma))
+
 print("Poisson Distribution Accuracy in 1000 Simulations:")
 
 print("Accurate Category Prediction:")
@@ -418,6 +489,9 @@ print(pois_accuracy)
 
 print("Total Riders Deviation:")
 Actual_Total-pois_Pred_Total
+
+print("Model Bias:")
+print(mean(missed_riders_pois))
 
 print("Negative Binomial Distribution Accuracy in 1000 Simulations:")
 
@@ -427,6 +501,10 @@ print(nbin_accuracy)
 print("Total Riders Deviation:")
 Actual_Total-nbin_Pred_Total
 
+print("Model Bias:")
+
+print(mean(missed_riders_nbin))
+
 print("Geometric Distribution Accuracy in 1000 Simulations:")
 
 print("Accurate Category Prediction:")
@@ -435,26 +513,50 @@ print(geom_accuracy)
 print("Total Riders Deviation:")
 Actual_Total-geom_Pred_Total
 
+print("Model Bias:")
+print(mean(missed_riders_geom))
+
+####Plot Distribution of Total Rider Bias#####
+hist(missed_riders_gamma, main = "", xlab = "Gamma Missed Riders Per Simulation", prob = T, col = "darkred")
+lines(density(missed_riders_gamma), col = "darkblue", lwd = 2)
+
+hist(missed_riders_pois, main = "", xlab = "Poisson Missed Riders Per Simulation", prob = T, col = "darkred")
+lines(density(missed_riders_pois), col = "darkblue", lwd = 2)
+
+hist(missed_riders_nbin, main = "", xlab = "Negative Binomial Missed Riders Per Simulation", prob = T, col = "darkred")
+lines(density(missed_riders_nbin), col = "darkblue", lwd = 2)
+
+hist(missed_riders_geom, main = "", xlab = "Geometric Missed Riders Per Simulation", prob = T, col = "darkred")
+lines(density(missed_riders_geom), col = "darkblue", lwd = 2)
+
 # "Gamma Distribution Accuracy in 1000 Simulations:"
 # "Accurate Category Prediction:"
 #0.7738467
 # "Total Riders Deviation:"
 # 1164
+# "Model Bias:"
+# -10.014
 
 #  "Poisson Distribution Accuracy in 1000 Simulations:"
 # "Accurate Category Prediction:"
 # 0.7702441
 # "Total Riders Deviation:"
 # -7835
+# "Model Bias:"
+# -1.015
 
 # "Negative Binomial Distribution Accuracy in 1000 Simulations:"
 # "Accurate Category Prediction:"
 # 0.7452268
 # "Total Riders Deviation:"
 # -43385
+# "Model Bias:"
+# 34.535
 
 # "Geometric Distribution Accuracy in 1000 Simulations:"
 # "Accurate Category Prediction:"
 # 0.6846381
 # "Total Riders Deviation:"
 # -9101
+# "Model Bias:"
+# 0.251
