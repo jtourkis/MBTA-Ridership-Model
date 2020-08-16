@@ -278,6 +278,205 @@ print("Geom MIT Test Stat")
 
 N*sum((merged_geom2$Nj_Rate-merged_geom2$p_Bins)^2/merged_geom2$p_Bins)
 
+
+######RUN 1000 SIMULATIONS OF EACH DISTRIBUTION AND ASSESS ACCURACY########
+
+#####Find Expected Categories for the Actual Data Repeated 1000 Times
+
+actual_round_1000<-data.frame(table(round(Route_28_Peak_AM$average_ons)))
+actual_round_1000$ActualFreqx1000<-actual_round_1000$Freq*1000
+print(actual_round_1000)
+
+
+#####Get a Matrix of Estimates###
+####1000 Columns with N Simulations From The Gamma Distribution######
+
+set.seed(13)
+gamma_x<-replicate(n = 1000, 
+          round(rgamma(n = N, shape = k_gam , scale = theta_gam) ))
+predicted_1000<-data.frame(table(gamma_x))
+
+Accuracy_df<-merge(predicted_1000,actual_round_1000, by.x="gamma_x", by.y="Var1", all=TRUE)
+Accuracy_df$Freq.y[is.na(Accuracy_df$Freq.y)] <- 0
+Accuracy_df$Freq.x[is.na(Accuracy_df$Freq.x)] <- 0
+Accuracy_df$ActualFreqx1000[is.na(Accuracy_df$ActualFreqx1000)] <- 0
+Accuracy_df$gamma_x<-as.numeric(Accuracy_df$gamma_x)
+print(Accuracy_df)
+
+Accuracy_df$correct<-pmin(Accuracy_df$Freq.x,Accuracy_df$ActualFreqx1000)
+
+num_correct<-sum(pmin(Accuracy_df$Freq.x,Accuracy_df$ActualFreqx1000))
+
+num_incorrect<-sum(abs(Accuracy_df$ActualFreqx1000-Accuracy_df$Freq.x))
+
+gamma_accuracy<-num_correct/(num_correct+num_incorrect)
+  
+  
+print(gamma_accuracy)
+
+
+
+####Calculate the number of people off:
+
+Actual_Total<-sum(Accuracy_df$ActualFreqx1000*Accuracy_df$gamma_x)
+
+gamma_Pred_Total<-sum(Accuracy_df$Freq.x*Accuracy_df$gamma_x)
+
+abs(Actual_Total-gamma_Pred_Total)
+
+#####Get a Matrix of Estimates###
+####1000 Columns with N Simulations From The Poisson Distribution######
+
+set.seed(14)
+pois_x<-replicate(n = 1000, 
+          rpois(n = N, lambda = mean(Route_28_Peak_AM$average_ons)))
+pois_predicted_1000<-data.frame(table(pois_x))
+
+Accuracy_df<-merge(pois_predicted_1000,actual_round_1000, by.x="pois_x", by.y="Var1", all=TRUE)
+Accuracy_df$Freq.y[is.na(Accuracy_df$Freq.y)] <- 0
+Accuracy_df$Freq.x[is.na(Accuracy_df$Freq.x)] <- 0
+Accuracy_df$ActualFreqx1000[is.na(Accuracy_df$ActualFreqx1000)] <- 0
+Accuracy_df$pois_x<-as.numeric(Accuracy_df$pois_x)
+print(Accuracy_df)
+
+Accuracy_df$correct<-pmin(Accuracy_df$Freq.x,Accuracy_df$ActualFreqx1000)
+
+num_correct<-sum(pmin(Accuracy_df$Freq.x,Accuracy_df$ActualFreqx1000))
+
+num_incorrect<-sum(abs(Accuracy_df$ActualFreqx1000-Accuracy_df$Freq.x))
+
+pois_accuracy<-num_correct/(num_correct+num_incorrect)
+  
+  
+print(pois_accuracy)
+
+####Calculate the number of people off:
+
+pois_Pred_Total<-sum(Accuracy_df$Freq.x*Accuracy_df$pois_x)
+
+abs(Actual_Total-pois_Pred_Total)
+
+#####Get a Matrix of Estimates###
+####1000 Columns with N Simulations From The NBinom Distribution######
+
+set.seed(15)
+nbin_x<-replicate(n = 1000, 
+          rnbinom(N, size = r_MM, prob = p_MM))
+nbin_predicted_1000<-data.frame(table(nbin_x))
+
+Accuracy_df<-merge(nbin_predicted_1000,actual_round_1000, by.x="nbin_x", by.y="Var1", all=TRUE)
+Accuracy_df$Freq.y[is.na(Accuracy_df$Freq.y)] <- 0
+Accuracy_df$Freq.x[is.na(Accuracy_df$Freq.x)] <- 0
+Accuracy_df$ActualFreqx1000[is.na(Accuracy_df$ActualFreqx1000)] <- 0
+Accuracy_df$nbin_x<-as.numeric(Accuracy_df$nbin_x)
+print(Accuracy_df)
+
+Accuracy_df$correct<-pmin(Accuracy_df$Freq.x,Accuracy_df$ActualFreqx1000)
+
+num_correct<-sum(pmin(Accuracy_df$Freq.x,Accuracy_df$ActualFreqx1000))
+
+num_incorrect<-sum(abs(Accuracy_df$ActualFreqx1000-Accuracy_df$Freq.x))
+
+nbin_accuracy<-num_correct/(num_correct+num_incorrect)
+  
+  
+print(nbin_accuracy)
+
+####Calculate the number of people off:
+
+nbin_Pred_Total<-sum(Accuracy_df$Freq.x*Accuracy_df$nbin_x)
+abs(Actual_Total-nbin_Pred_Total)
+#####Get a Matrix of Estimates###
+####1000 Columns with N Simulations From The Geom Distribution######
+
+set.seed(17)
+geom_x<-replicate(n = 1000, 
+          rnbinom(N, size = 1, prob = p_MLE))
+
+geom_predicted_1000<-data.frame(table(geom_x))
+
+Accuracy_df<-merge(geom_predicted_1000,actual_round_1000, by.x="geom_x", by.y="Var1", all=TRUE)
+
+Accuracy_df$Freq.y[is.na(Accuracy_df$Freq.y)] <- 0
+Accuracy_df$Freq.x[is.na(Accuracy_df$Freq.x)] <- 0
+Accuracy_df$ActualFreqx1000[is.na(Accuracy_df$ActualFreqx1000)] <- 0
+Accuracy_df$geom_x<-as.numeric(Accuracy_df$geom_x)
+print(Accuracy_df)
+
+Accuracy_df$correct<-pmin(Accuracy_df$Freq.x,Accuracy_df$ActualFreqx1000)
+
+num_correct<-sum(pmin(Accuracy_df$Freq.x,Accuracy_df$ActualFreqx1000))
+
+num_incorrect<-sum(abs(Accuracy_df$ActualFreqx1000-Accuracy_df$Freq.x))
+
+geom_accuracy<-num_correct/(num_correct+num_incorrect)
+print(geom_accuracy)
+
+
+####Calculate the number of people off:
+
+geom_Pred_Total<-sum(Accuracy_df$Freq.x*Accuracy_df$geom_x)
+
+abs(Actual_Total-geom_Pred_Total)
+
+######Accuracy Results####
+
+print("Gamma Distribution Accuracy in 1000 Simulations:")
+
+print("Accurate Category Prediction:")
+print(gamma_accuracy)
+
+print("Total Riders Deviation:")
+Actual_Total-gamma_Pred_Total
+
+print("Poisson Distribution Accuracy in 1000 Simulations:")
+
+print("Accurate Category Prediction:")
+print(pois_accuracy)
+
+print("Total Riders Deviation:")
+Actual_Total-pois_Pred_Total
+
+print("Negative Binomial Distribution Accuracy in 1000 Simulations:")
+
+print("Accurate Category Prediction:")
+print(nbin_accuracy)
+
+print("Total Riders Deviation:")
+Actual_Total-nbin_Pred_Total
+
+print("Geometric Distribution Accuracy in 1000 Simulations:")
+
+print("Accurate Category Prediction:")
+print(geom_accuracy)
+
+print("Total Riders Deviation:")
+Actual_Total-geom_Pred_Total
+
+# "Gamma Distribution Accuracy in 1000 Simulations:"
+
+# "Accurate Category Prediction:"
+#0.7738467
+# "Total Riders Deviation:"
+# 1164
+
+#  "Poisson Distribution Accuracy in 1000 Simulations:"
+# "Accurate Category Prediction:"
+# 0.7702441
+# "Total Riders Deviation:"
+# -7835
+
+# "Negative Binomial Distribution Accuracy in 1000 Simulations:"
+# "Accurate Category Prediction:"
+# 0.7452268
+# "Total Riders Deviation:"
+# -43385
+
+# "Geometric Distribution Accuracy in 1000 Simulations:"
+# "Accurate Category Prediction:"
+# 0.6846381
+# "Total Riders Deviation:"
+# -9101
 ```
 
 Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Cmd+Option+I*.
